@@ -1,0 +1,246 @@
+@import "variables.scss";
+@import "fonts.scss";
+@import "mixins.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  line-height: 1;
+  color: $primary-text-color;
+}
+
+body {
+  height: inherit;
+  background: url("../img/background.jpg");
+  font-family: "Trebuchet-MS", Helvetica, sans-serif;
+}
+
+.noscript{
+  font-size: 1.5rem;
+  color: red;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+}
+
+#root:before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+
+.cards {
+  width: 1280px;
+  &__title {
+    color: #fff;
+    font-family: "Exo 2.0 - Thin", Helvetica, sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    margin-top: -3px;
+    margin-bottom: 70px;
+    text-align: center;
+  }
+}
+
+.goods {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 40px;
+}
+
+.card {
+  position: relative;
+  top: 0;
+  left: -4px;
+  width: 320px;
+  height: 437px;
+  z-index: 10;
+  background-color: #f2f2f2;
+  border-radius: 0 0 13px 13px;
+  border: 4px solid $card-color;
+  border-top: 0;
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  &:before,
+  &:after {
+    position: absolute;
+    top: -43px;
+    width: 202px;
+    height: 40px;
+    content: "";
+    background-color: inherit;
+    border-top: 4px solid $card-color;
+  }
+  &:before {
+    left: 18px;
+    transform: skew(-45deg);
+    border-left: 4px solid $card-color;
+  }
+  &:after {
+    z-index: -1;
+    right: -4px;
+    border-top-right-radius: 13px;
+    border-right: 4px solid $card-color;
+  }
+  &_unselected:hover {
+    @include change-border-color($card-color-hover);
+    .circle {
+      background: $card-color-hover;
+    }
+  }
+  &_selected {
+    @include change-border-color($selectedCard-color);
+  }
+  &_selected:hover {
+    @include change-border-color($selectedCard-color-hover);
+    .circle {
+      background: $selectedCard-color-hover;
+    }
+  }
+  &_disabled {
+    cursor: default;
+    @include change-border-color(#b3b3b3, default);
+    .card__subtitle:before {
+      content: "";
+      position: absolute;
+      top: 40px;
+      left: -44px;
+      width: 312px;
+      height: 433px;
+      background: #f2f2f2;
+      opacity: 0.5;
+      z-index: 2;
+      border-radius: 0 0 9px 9px;
+    }
+    .card__subtitle:after {
+      position: absolute;
+      top: 1px;
+      left: -4px;
+      width: 267px;
+      height: 40px;
+      content: "";
+      z-index: 100;
+      background-color: #f2f2f2;
+      opacity: 0.5;
+    }
+    .card {
+      &__title {
+        color: $primary-text-color;
+      }
+    }
+  }
+  &__subtitle {
+    position: absolute;
+    top: -40px;
+    left: 44px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+    padding-top: 19px;
+  }
+  &__title {
+    color: #000;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-left: 43px;
+  }
+  &__ingredient {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    padding-top: 4px;
+  }
+  &__inform {
+    padding-top: 17px;
+    padding-left: 46px;
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    list-style: none;
+    &_bold {
+      font-weight: 700;
+    }
+  }
+  &__img {
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+  }
+  &__caption {
+    position: relative;
+    left: -4px;
+    cursor: default;
+    width: 320px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+    color: #ffffff;
+    padding-top: 16px;
+    &_disabled {
+      color: #ffff66;
+    }
+  }
+  &__link {
+    color: $card-color;
+    padding-left: 4px;
+    &:hover {
+      color: $card-color-hover;
+    }
+  }
+}
+
+.circle {
+  position: absolute;
+  right: 11px;
+  bottom: 10px;
+  height: 81px;
+  width: 81px;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  &_unselected {
+    background-color: $card-color;
+  }
+  &_selected {
+    background-color: $selectedCard-color;
+  }
+  &_disabled {
+    background-color: #b3b3b3;
+    z-index: 3;
+  }
+  &__value {
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 35px;
+    padding-top: 15px;
+  }
+  &__unit {
+    font-size: 21px;
+  }
+}
+
+@import "media.scss";

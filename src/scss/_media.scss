@@ -1,0 +1,35 @@
+@media (max-width: 1200px) {
+  .cards {
+    height: 100%;
+    &__title {
+      padding-top: 50px;
+    }
+  }
+  .card-wrapper {
+    margin: 0 30px 60px 30px;
+  }
+}
+
+@media (max-height: 600px) {
+  .cards {
+    @include small-height(100px);
+  }
+}
+
+@media (max-height: 450px) {
+  .cards {
+    @include small-height(300px);
+  }
+}
+
+@media (max-height: 250px) {
+  .cards {
+    @include small-height(500px);
+  }
+}
+
+@media (max-width: 500px) {
+  .cards__title {
+    font-size: 26px;
+  }
+}

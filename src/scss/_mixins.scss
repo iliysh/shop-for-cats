@@ -1,0 +1,27 @@
+@mixin change-border-color($border-color, $is-cursor: pointer) {
+  border: 4px solid $border-color;
+  border-top: 0;
+  &:before,
+  &:after {
+    border-top: 4px solid $border-color;
+    z-index: -1;
+    cursor: $is-cursor;
+  }
+  &:before {
+    border-left: 4px solid $border-color;
+  }
+  &:after {
+    z-index: -1;
+    right: -4px;
+    border-top-right-radius: 13px;
+    border-right: 4px solid $border-color;
+  }
+}
+
+@mixin small-height($margin) {
+  margin-top: $margin;
+  margin-bottom: 30px;
+  &__title {
+    padding-top: 50px;
+  }
+}
